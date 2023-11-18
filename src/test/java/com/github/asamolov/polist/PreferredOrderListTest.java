@@ -14,4 +14,16 @@ class PreferredOrderListTest {
         assertEquals("A", list.get(0));
         assertEquals(new ItemWithOrder<>("A", null), list.getWithOrder(0));
     }
+
+    @Test
+    void shouldInsertItemsWithOrder() {
+        var list = new PreferredOrderList<String>();
+        list.insert("A");
+        list.insert("B", 1);
+        assertEquals("A", list.get(0));
+        assertEquals(new ItemWithOrder<>("A", null), list.getWithOrder(0));
+        assertEquals("B", list.get(1));
+        assertEquals(new ItemWithOrder<>("B", 1), list.getWithOrder(1));
+
+    }
 }
