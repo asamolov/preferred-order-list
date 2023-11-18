@@ -33,4 +33,19 @@ class PreferredOrderListTest {
         assertEquals("A", list.get(0));
         assertEquals(new ItemWithOrder<>("A", 1), list.getWithOrder(0));
     }
+
+    @Test
+    void shouldMoveItemsWithoutOrder() {
+        var list = new PreferredOrderList<String>();
+        list.insert("A");
+        list.insert("B", 1);
+        list.insert("C", 0);
+        assertEquals(3, list.size());
+        assertEquals("C", list.get(0));
+        assertEquals(new ItemWithOrder<>("C", 0), list.getWithOrder(0));
+        assertEquals("B", list.get(1));
+        assertEquals(new ItemWithOrder<>("B", 1), list.getWithOrder(1));
+        assertEquals("A", list.get(2));
+        assertEquals(new ItemWithOrder<>("A", null), list.getWithOrder(2));
+    }
 }
