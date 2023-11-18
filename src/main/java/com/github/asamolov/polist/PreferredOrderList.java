@@ -28,7 +28,11 @@ public class PreferredOrderList<T> {
     public void insert(T item, int order) {
         Objects.requireNonNull(item, "Item should not be null");
         // just insert to the requested position for now
-        list.add(order, new ItemWithOrder<>(item, order));
+        if (order >= 0 && order < list.size()) {
+            list.add(order, new ItemWithOrder<>(item, order));
+        } else {
+            list.add(new ItemWithOrder<>(item, order));
+        }
     }
 
     /**

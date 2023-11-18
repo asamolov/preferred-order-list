@@ -24,6 +24,13 @@ class PreferredOrderListTest {
         assertEquals(new ItemWithOrder<>("A", null), list.getWithOrder(0));
         assertEquals("B", list.get(1));
         assertEquals(new ItemWithOrder<>("B", 1), list.getWithOrder(1));
+    }
 
+    @Test
+    void shouldInsertItemsWithOrderOutOfBounds() {
+        var list = new PreferredOrderList<String>();
+        list.insert("A", 1);
+        assertEquals("A", list.get(0));
+        assertEquals(new ItemWithOrder<>("A", 1), list.getWithOrder(0));
     }
 }
