@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PreferredOrderListTest {
 
     @Test
-    void shouldInsertItemsWithOrder() {
+    void shouldInsertItemsWithoutOrder() {
         var list = new PreferredOrderList<String>();
         list.insert("A");
         assertEquals("A", list.get(0));
