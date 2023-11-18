@@ -11,8 +11,7 @@ class PreferredOrderListTest {
     void shouldInsertItemsWithoutOrder() {
         var list = new PreferredOrderList<String>();
         list.insert("A");
-        assertEquals("A", list.get(0));
-        assertEquals(new ItemWithOrder<>("A", null), list.getWithOrder(0));
+        assertEquals("[ (A -) ]", list.toString());
     }
 
     @Test
@@ -20,18 +19,14 @@ class PreferredOrderListTest {
         var list = new PreferredOrderList<String>();
         list.insert("A");
         list.insert("B", 1);
-        assertEquals("A", list.get(0));
-        assertEquals(new ItemWithOrder<>("A", null), list.getWithOrder(0));
-        assertEquals("B", list.get(1));
-        assertEquals(new ItemWithOrder<>("B", 1), list.getWithOrder(1));
+        assertEquals("[ (A -) (B 1) ]", list.toString());
     }
 
     @Test
     void shouldInsertItemsWithOrderOutOfBounds() {
         var list = new PreferredOrderList<String>();
         list.insert("A", 1);
-        assertEquals("A", list.get(0));
-        assertEquals(new ItemWithOrder<>("A", 1), list.getWithOrder(0));
+        assertEquals("[ (A 1) ]", list.toString());
     }
 
     @Test
@@ -40,12 +35,6 @@ class PreferredOrderListTest {
         list.insert("A");
         list.insert("B", 1);
         list.insert("C", 0);
-        assertEquals(3, list.size());
-        assertEquals("C", list.get(0));
-        assertEquals(new ItemWithOrder<>("C", 0), list.getWithOrder(0));
-        assertEquals("B", list.get(1));
-        assertEquals(new ItemWithOrder<>("B", 1), list.getWithOrder(1));
-        assertEquals("A", list.get(2));
-        assertEquals(new ItemWithOrder<>("A", null), list.getWithOrder(2));
+        assertEquals("[ (C 0) (B 1) (A -) ]", list.toString());
     }
 }

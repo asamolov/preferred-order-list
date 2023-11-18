@@ -1,8 +1,7 @@
 package com.github.asamolov.polist;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class PreferredOrderList<T> {
 
@@ -118,5 +117,16 @@ public class PreferredOrderList<T> {
     }
 
     public record ItemWithOrder<T>(T item, Integer order) {
+        @Override
+        public String toString() {
+            return "(" + item + " " + Optional.ofNullable(order).map(Object::toString).orElse("-") + ")";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return list.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(" ", "[ ", " ]"));
     }
 }
